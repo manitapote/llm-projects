@@ -1,4 +1,4 @@
-# llm-projects
+# LLM-projects
 
 
 This is a collection of projects to learn LLM based application development.
