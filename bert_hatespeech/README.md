@@ -239,11 +239,12 @@ http://localhost:8000/docs
 **Hyperparameter search results:**
 
 | Learning Rate | Epochs | Batch Size | Test F1 (Hate) | Test Loss |
-|---|---|---|---|---|---|
-| 1e-05 | 3 | 32 | 0.784  | 0.362 |
-| 2e-05 | 3 | 32 | 0.816  | 0.353 |
-| **3e-05** | **3** | **32** | **0.826**  | **0.379** |
-| 5e-05 | 3 | 32 | 0.823  | 0.388 |
+|---|---|---|---|---|
+| 1e-05 | 3 | 32 | 0.784 | 0.362 |
+| 2e-05 | 3 | 32 | 0.816 | 0.353 |
+| **3e-05** | **3** | **32** | **0.826** | **0.379** |
+| 5e-05 | 3 | 32 | 0.823 | 0.388 |
+
 
 **Key observations:**
 - Learning rate 3e-05 consistently outperforms others
