@@ -105,13 +105,13 @@ bert_hatespeech/
 
 ## Training Pipeline
 
-**Stage 1 — Hyperparameter Search**
+**Stage 1: Hyperparameter Search**
 Grid search across learning rates (1e-05, 2e-05, 3e-05, 5e-05) and batch sizes at epoch 3.
 
-**Stage 2 — Refinement**
+**Stage 2: Refinement**
 Best learning rate (3e-05) tested across epochs (2, 3, 4) and batch sizes (16, 32).
 
-**Key finding:** More than 3 epochs leads to overfitting — train loss drops to 0.067 while test loss jumps to 0.559.
+**Key finding:** More than 3 epochs leads to overfitting, train loss drops to 0.067 while test loss jumps to 0.559.
 
 ---
 
@@ -120,7 +120,7 @@ Best learning rate (3e-05) tested across epochs (2, 3, 4) and batch sizes (16, 3
 **1. Clone the repository**
 
 ```bash
-git clone https://github.com/manitapote/bert-hatespeech
+git clone https://github.com/manitapote/llm-projects/bert_hatespeech
 cd bert_hatespeech
 ```
 
@@ -178,9 +178,9 @@ http://localhost:8501
 
 ## Running on a Remote Server (SSH Tunnel)
 
-If your model runs on a remote HPC cluster (e.g., IU Quartz), tunnel the ports to your local machine:
+If your model runs on a remote HPC cluster, tunnel the ports to your local machine:
 
-**Step 1 — Start FastAPI and Streamlit on the remote server:**
+**Step 1: Start FastAPI and Streamlit on the remote server:**
 
 ```bash
 # Terminal 1 — FastAPI
@@ -190,7 +190,7 @@ uvicorn app:app --host 0.0.0.0 --port 8000
 streamlit run streamlit_app.py --server.port 8501
 ```
 
-**Step 2 — On your local machine, set up the SSH tunnel:**
+**Step 2: On your local machine, set up the SSH tunnel:**
 
 ```bash
 ssh -J your_user@gateway.server.edu \
@@ -199,7 +199,7 @@ ssh -J your_user@gateway.server.edu \
     your_user@compute_node.server.edu
 ```
 
-**Step 3 — Open your browser:**
+**Step 3: Open your browser:**
 
 ```
 http://localhost:8501
@@ -238,16 +238,16 @@ http://localhost:8000/docs
 
 **Hyperparameter search results:**
 
-| Learning Rate | Epochs | Batch Size | Test F1 (Hate) | Test Accuracy | Test Loss |
+| Learning Rate | Epochs | Batch Size | Test F1 (Hate) | Test Loss |
 |---|---|---|---|---|---|
-| 1e-05 | 3 | 32 | 0.784 | 0.862 | 0.362 |
-| 2e-05 | 3 | 32 | 0.816 | 0.885 | 0.353 |
-| **3e-05** | **3** | **32** | **0.826** | **0.891** | **0.379** |
-| 5e-05 | 3 | 32 | 0.823 | 0.894 | 0.388 |
+| 1e-05 | 3 | 32 | 0.784  | 0.362 |
+| 2e-05 | 3 | 32 | 0.816  | 0.353 |
+| **3e-05** | **3** | **32** | **0.826**  | **0.379** |
+| 5e-05 | 3 | 32 | 0.823  | 0.388 |
 
 **Key observations:**
 - Learning rate 3e-05 consistently outperforms others
-- 3 epochs is optimal — epoch 4 shows clear overfitting (train loss 0.067, test loss 0.559)
+- 3 epochs is optimal, epoch 4 shows clear overfitting (train loss 0.067, test loss 0.559)
 - Batch size 32 marginally outperforms batch size 16
 - Model has higher recall than precision (catches most hate speech but flags some false positives)
 
@@ -255,10 +255,9 @@ http://localhost:8000/docs
 
 ## Limitations
 
-- Trained on Twitter data — may not generalize to other platforms
-- Focuses on targeted group-based hate speech (religious, ethnic, political) — general insults like "you scum" are classified as not hate speech by design
-- Performance drops significantly on the annotator set (F1 hate: ~0.33) due to domain shift — annotated set contains crypto/financial tweets not present in training
-- No GPU inference optimization — for production use, consider ONNX export or TorchScript
+- Trained on Twitter data, may not generalize to other platforms
+- Focuses on targeted group-based hate speech (religious, ethnic, political), general insults are classified as not hate speech by design
+- No GPU inference optimization, for production use, consider ONNX export or TorchScript
 
 ---
 
