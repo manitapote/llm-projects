@@ -156,19 +156,19 @@ scikit-learn
 
 ## Running Locally
 
-**Step 1 — Start the FastAPI backend:**
+**Step 1: Start the FastAPI backend:**
 
 ```bash
 uvicorn app:app --host 0.0.0.0 --port 8000
 ```
 
-**Step 2 — Start the Streamlit frontend (new terminal):**
+**Step 2: Start the Streamlit frontend (new terminal):**
 
 ```bash
 streamlit run streamlit_app.py --server.port 8501
 ```
 
-**Step 3 — Open your browser:**
+**Step 3: Open your browser:**
 
 ```
 http://localhost:8501
